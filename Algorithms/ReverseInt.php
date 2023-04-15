@@ -12,6 +12,29 @@ Constraints:
 
 <?php
 
+// solution-----------------#1----------------
+class Solution {
+
+    /**
+     * @param Integer $x
+     * @return Integer
+     */
+    function reverse($x) { 
+        $i = $x<0 ? "-" : "";
+        $int = (int)strrev($x);
+        if( $int >= (-1 * 2 ** 31) && $int <= (2 ** 31) -1 )
+        {
+            $output = $i.$int; 
+            return $output;
+        }
+        else {
+            return 0;
+        }    
+    }
+}
+
+
+// solution--------------------#2-----------------------
 class Solution {
 
     /**
@@ -19,18 +42,32 @@ class Solution {
      * @return Integer
      */
     function reverse($x) {
-        $output =0;
-        if($x < pow(2,31) -1 || $x > -1 * pow(2, 31))
-        {
-            $i = $x<0 ? "-" : "";
-            $int = (int)strrev($x);
-            $output = $i.$int; 
-        }
-        else {
-            $output = 0;
-        }
-        return $output;
+        $array = array();
        
+        if($x<0)
+        {
+           array_push($array, "-" );
+           $x = $x*(-1);
+        }
+        $array_x = str_split($x);
+        
+        for($i=count($array_x); $i>=0; $i--)
+        {
+            array_push($array, $array_x[$i] );
+        }
+        
+        $result = implode($array);
+        if($result < 2**31 - 1 && $result > (-2)**31)
+        {
+            return (int)$result;
+        }
+        else
+        {
+            return 0;
+        }
+            
+            
     }
 }
+
 ?>
